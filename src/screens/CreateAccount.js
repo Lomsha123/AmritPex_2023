@@ -19,12 +19,12 @@ const CreateAccount = props => {
         style={{
           flexDirection: 'row',
           width: wp(100),
-          justifyContent: 'flex-end',
+          justifyContent: 'center',
         }}>
-        <View style={{marginRight: wp(20)}}>
+        <View style={{marginRight: wp(0)}}>
           <Text style={styles.text}>Create account</Text>
         </View>
-        <View style={{marginRight: wp(3)}}>
+        {/* <View style={{marginRight: wp(3)}}>
           <TouchableOpacity
             onPress={() => {
               navigation.push('Home');
@@ -38,7 +38,7 @@ const CreateAccount = props => {
               Skip Now
             </Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
       <View
         style={{

@@ -70,7 +70,7 @@ const NewsDetailScreen = (props) => {
           </View>
         </View>
       </View>
-      <Footer/>
+      <Footer tab="Home"/>
     </View>
   );
 };

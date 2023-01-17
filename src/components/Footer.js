@@ -1,21 +1,38 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const Footer = props => {
   const navigation = props.navigation;
+  const tab = props.tab;
+  // const [tab, setTab] = useState('Home');
+  // useEffect(() => {}, [tab]);
+  const [score, setScore] = useState(0);
+  console.log(score, 'score/lomsha');
   return (
     <View style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.push('Home');
+        }}>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <View>
-            <Icon size={hp(3)} color="#103994" name="home" />
+            {tab === 'Home' ? (
+              <Image
+                style={{height: hp(3), width: hp(3)}}
+                source={require('../assets/images/HomeIconHighligted.png')}
+              />
+            ) : (
+              <Image
+                style={{height: hp(2.5), width: hp(2.5)}}
+                source={require('../assets/images/HomeIcon.png')}
+              />
+            )}
           </View>
           <View>
             <Text style={{fontSize: hp(1.5), color: '#103994'}}>Home</Text>
@@ -23,32 +40,73 @@ export const Footer = props => {
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => {
-          navigation.push('Gallery');
+        onPress={async () => {
+          // await setTab('Gallery');
+          await navigation.push('Gallery');
         }}>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <View>
-            <Icon size={hp(3)} color="#585858" name="home" />
+            {tab === 'Gallery' ? (
+              <Image
+                style={{height: hp(3), width: hp(3)}}
+                source={require('../assets/images/GalleryIconHighlighted.png')}
+              />
+            ) : (
+              <Image
+                style={{height: hp(3), width: hp(3)}}
+                source={require('../assets/images/GalleryIcon.png')}
+              />
+            )}
           </View>
           <View>
             <Text style={{fontSize: hp(1.5), color: '#585858'}}>Gallery</Text>
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          // setTab('Quiz');
+          navigation.push('QuizHome', {score, setScore});
+        }}>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <View>
-            <Icon size={hp(3)} color="#585858" name="Home" />
+            {tab === 'Quiz' ? (
+              <Image
+                style={{height: hp(3), width: hp(3)}}
+                source={require('../assets/images/QuizIconHighlighted.png')}
+              />
+            ) : (
+              <Image
+                style={{height: hp(3), width: hp(3)}}
+                source={require('../assets/images/QuizIcon.png')}
+              />
+            )}
           </View>
           <View>
             <Text style={{fontSize: hp(1.5), color: '#585858'}}>Quiz</Text>
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          // setTab('Pass');
+          score === 10
+            ? navigation.push('GoldenPass')
+            : navigation.push('NormalPass');
+        }}>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <View>
-            <Icon size={hp(3)} color="#585858" name="Home" />
+            {tab === 'Pass' ? (
+              <Image
+                style={{height: hp(2.6), width: hp(3.2)}}
+                source={require('../assets/images/PassIconHighlighted.png')}
+              />
+            ) : (
+              <Image
+                style={{height: hp(2.6), width: hp(3.2)}}
+                source={require('../assets/images/PassIcon.png')}
+              />
+            )}
           </View>
           <View>
             <Text style={{fontSize: hp(1.5), color: '#585858'}}>Pass</Text>

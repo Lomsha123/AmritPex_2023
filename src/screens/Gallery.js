@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -19,44 +19,97 @@ import {Footer} from '../components/Footer';
 const images = [
   {
     id: 1,
-    url: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+    url: require('../assets/images/Gallery_Images/20221221_121904.jpg'),
   },
   {
     id: 2,
-    url: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+    url: require('../assets/images/Gallery_Images/20221221_121937.jpg'),
   },
   {
     id: 3,
-    url: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+    url: require('../assets/images/Gallery_Images/20221221_122001.jpg'),
   },
   {
     id: 4,
-    url: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+    url: require('../assets/images/Gallery_Images/IMG_2192.jpg'),
   },
   {
     id: 5,
-    url: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+    url: require('../assets/images/Gallery_Images/IMG_2193.jpg'),
   },
   {
     id: 6,
-    url: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+    url: require('../assets/images/Gallery_Images/IMG_2194.jpg'),
   },
   {
     id: 7,
-    url: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+    url: require('../assets/images/Gallery_Images/IMG_2196.jpg'),
   },
   {
     id: 8,
-    url: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+    url: require('../assets/images/Gallery_Images/IMG_2197.jpg'),
   },
   {
     id: 9,
-    url: 'https://images.pexels.com/photos/268533/pexels-photo-268533.jpeg?cs=srgb&dl=pexels-pixabay-268533.jpg&fm=jpg',
+    url: require('../assets/images/Gallery_Images/IMG_2198.jpg'),
+  },
+  {
+    id: 10,
+    url: require('../assets/images/Gallery_Images/IMG_2199.jpg'),
+  },
+  {
+    id: 11,
+    url: require('../assets/images/Gallery_Images/IMG_2205.jpg'),
+  },
+  {
+    id: 12,
+    url: require('../assets/images/Gallery_Images/IMG_2207.jpg'),
+  },
+  {
+    id: 13,
+    url: require('../assets/images/Gallery_Images/IMG_2224.jpg'),
+  },
+  {
+    id: 14,
+    url: require('../assets/images/Gallery_Images/IMG_2225.jpg'),
+  },
+  {
+    id: 15,
+    url: require('../assets/images/Gallery_Images/IMG_2226.jpg'),
+  },
+  {
+    id: 16,
+    url: require('../assets/images/Gallery_Images/IMG_2241.jpg'),
+  },
+  {
+    id: 17,
+    url: require('../assets/images/Gallery_Images/IMG_2248.jpg'),
+  },
+  {
+    id: 18,
+    url: require('../assets/images/Gallery_Images/IMG_2250.jpg'),
+  },
+  {
+    id: 19,
+    url: require('../assets/images/Gallery_Images/IMG_2258.jpg'),
+  },
+  {
+    id: 20,
+    url: require('../assets/images/Gallery_Images/IMG_2260.jpg'),
+  },
+  {
+    id: 21,
+    url: require('../assets/images/Gallery_Images/IMG_2261.jpg'),
+  },
+  {
+    id: 22,
+    url: require('../assets/images/Gallery_Images/IMG_2280.jpg'),
   },
 ];
 
 const Gallery = props => {
   const {navigation} = props;
+
   return (
     <View style={styles.container}>
       <View
@@ -86,27 +139,27 @@ const Gallery = props => {
           </Text>
         </View>
         <View>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Icon color="#EAC675" name="more-vertical" size={hp(2.5)} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
-      <View style={{marginTop:hp(2), alignItems:'center', flex:0}}>
+      <View style={{marginTop: hp(2), alignItems: 'center', flex: 1, marginBottom:hp(8)}}>
         <FlatList
           data={images}
           keyExtractor={item => item.id}
           numColumns={2}
           renderItem={({item}) => (
-            <View style={{padding:hp(1)}}>
+            <View style={{padding: hp(1)}}>
               <Image
-                source={{uri: item.url}}
-                style={{height: hp(20), width: hp(20), borderRadius:hp(1)}}
+                source={item.url}
+                style={{height: hp(20), width: hp(20), borderRadius: hp(1)}}
               />
             </View>
           )}
         />
       </View>
-      <Footer navigation={navigation} />
+      <Footer navigation={navigation} tab="Gallery" />
     </View>
   );
 };

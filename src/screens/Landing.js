@@ -1,14 +1,54 @@
+/* eslint-disable radix */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import moment from 'moment';
 
 const Landing = props => {
   const {navigation} = props;
+  // const [totalDuration, setTotalDuration] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [days, setDays] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+  // const [time, setTime] = useState(Date.now());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Coundown timer for a given expiry date-time
+      let date = moment().utcOffset('+05:30').format('YYYY-MM-DD hh:mm:ss');
+      // console.log(date, 'lllll');
+      // let Date1 = new Date();
+      // console.log(Date1, 'date');
+      // Getting the current date-time
+      // You can set your own date-time
+      let expirydate = '2023-02-11 10:00:00';
+
+      let diffr = moment.duration(moment(expirydate).diff(moment(date)));
+      // console.log(diffr, 'kkk');
+      // Difference of the expiry date-time
+      var hours1 = parseInt(diffr.asHours());
+      var minutes1 = parseInt(diffr.minutes());
+      var seconds1 = parseInt(diffr.seconds());
+
+      // Converting in seconds
+      var d1 = (hours1 + minutes1 / 60 + seconds1 / (60 * 60)) / 24;
+      setHours(hours1 % 24);
+      setDays(Math.floor(d1));
+      setMinutes(minutes1);
+      setSeconds(seconds1);
+      // Settign up the duration of countdown
+      // setTotalDuration(d1);
+    }, 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.imageDivStyle}>
@@ -33,7 +73,7 @@ const Landing = props => {
           <View style={{paddingVertical: hp(2)}}>
             <Image
               style={{height: hp(25), width: wp(100)}}
-              source={require('../assets/images/Logo.png')}
+              source={require('../assets/images/Logo1.png')}
             />
           </View>
           <View
@@ -80,28 +120,28 @@ const Landing = props => {
           <View style={styles.viewStyle}>
             <Text
               style={[styles.textStyle, {fontSize: hp(2), fontWeight: '600'}]}>
-              65
+              {days}
             </Text>
             <Text style={styles.textStyle}>Days</Text>
           </View>
           <View style={styles.viewStyle}>
             <Text
               style={[styles.textStyle, {fontSize: hp(2), fontWeight: '600'}]}>
-              17
+              {hours}
             </Text>
             <Text style={styles.textStyle}>Hours</Text>
           </View>
           <View style={styles.viewStyle}>
             <Text
               style={[styles.textStyle, {fontSize: hp(2), fontWeight: '600'}]}>
-              29
+              {minutes}
             </Text>
             <Text style={styles.textStyle}>Minutes</Text>
           </View>
           <View style={styles.viewStyle}>
             <Text
               style={[styles.textStyle, {fontSize: hp(2), fontWeight: '600'}]}>
-              60
+              {seconds}
             </Text>
             <Text style={styles.textStyle}>Seconds</Text>
           </View>

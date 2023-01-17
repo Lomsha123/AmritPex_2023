@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View, Image, Linking} from 'react-native';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import { Footer } from '../components/Footer';
 import { HomeCard } from '../components/HomeCard';
@@ -21,7 +21,7 @@ const HomeScreen = (props) => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
-          navigation.push('ActivitiesScreen');
+          navigation.push('ActivityCategoryScreen');
         }}>
           <View style={{backgroundColor:'white', padding:hp(1.2), borderRadius:hp(0.5), width:wp(24), alignItems:'center'}}>
             <Text style={{color:'#103994', fontSize:hp(1.5), fontWeight:'600'}}>ACTIVITIES</Text>
@@ -45,14 +45,14 @@ const HomeScreen = (props) => {
           <TouchableOpacity><HomeCard/></TouchableOpacity>
         </View>
       </View>
-      <View style={{flexDirection:'row', justifyContent:'space-around', backgroundColor:'white', padding:hp(1),marginHorizontal:wp(6.5), borderRadius:hp(0.6)}}>
+      <View style={{flexDirection:'row', justifyContent:'space-around', backgroundColor:'white', padding:hp(1),marginHorizontal:wp(6.5), borderRadius:hp(0.6), alignItems:'center'}}>
         <Text style={{color:'black', fontWeight:'500'}}>Follow us on</Text>
-        <Image style={{height:hp(3), width:hp(3)}} source={require('../assets/images/Instagram_Icon.png')}/>
-        <Image style={{height:hp(3), width:hp(3)}} source={require('../assets/images/Facebook_Icon.png')}/>
-        <Image style={{height:hp(3), width:hp(4)}} source={require('../assets/images/Youtube_Icon.png')}/>
-        <Image style={{height:hp(3), width:hp(3.5)}} source={require('../assets/images/Twitter_Icon.png')}/>
+        <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/amritpex2023/')}><Image style={{height:hp(3), width:hp(3)}} source={require('../assets/images/Instagram_Icon.png')}/></TouchableOpacity>
+        <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/profile.php?id=100088534073563')}><Image style={{height:hp(3), width:hp(3)}} source={require('../assets/images/Facebook_Icon.png')}/></TouchableOpacity>
+        <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/@IndiaPost_DoP')}><Image style={{height:hp(3), width:hp(4)}} source={require('../assets/images/Youtube_Icon.png')}/></TouchableOpacity>
+        <TouchableOpacity onPress={() => Linking.openURL('https://twitter.com/Amritpex2023')}><Image style={{height:hp(3), width:hp(3.5)}} source={require('../assets/images/Twitter_Icon.png')}/></TouchableOpacity>
       </View>
-      <Footer navigation={navigation}/>
+      <Footer navigation={navigation} tab="Home"/>
     </View>
   );
 };

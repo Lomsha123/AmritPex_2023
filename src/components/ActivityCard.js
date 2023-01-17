@@ -32,7 +32,7 @@ export const AcitvityCard = props => {
           }}>
           {props.eventName}
         </Text>
-        <Text style={{fontSize: hp(1.25), marginBottom: hp(0.3)}}>
+        <Text style={{fontSize: hp(1.25), marginBottom: hp(0.3), color:'black'}}>
           {props.date}
         </Text>
       </View>

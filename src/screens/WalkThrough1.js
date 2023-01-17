@@ -7,8 +7,6 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  SafeAreaView,
-  Button,
 } from 'react-native';
 import {
   heightPercentageToDP as hp,
@@ -92,7 +90,7 @@ const WalkThrough1 = props => {
             justifyContent: 'flex-end',
             margin: hp(2),
           }}>
-          <Text style={{color: 'black', textDecorationLine: 'underline'}}>
+          <Text style={{color: 'white', textDecorationLine: 'underline'}}>
             Skip
           </Text>
         </View>
@@ -154,6 +152,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     paddingVertical: 30,
+    paddingHorizontal:wp(4),
   },
   introTitleStyle: {
     fontSize: 25,
@@ -174,8 +173,8 @@ const styles = StyleSheet.create({
 const slides = [
   {
     key: 's1',
-    text: 'Lorem ipsum dolor sit amet consectetur. Eleifend donec pretium in porta cras felis.',
-    title: 'Lorem ipsum dolor sit amet consectetur. In malesuada.',
+    text: 'Confirm your presence via App and generate your QR code for hassle-free entry to the venue!',
+    title: 'Pre-Registration Feature',
     image: {
       uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_mobile_recharge.png',
     },
@@ -183,15 +182,15 @@ const slides = [
   },
   {
     key: 's2',
-    title: 'Lorem ipsum dolor sit amet consectetur. In malesuada.',
-    text: 'Lorem ipsum dolor sit amet consectetur. Eleifend donec pretium in porta cras felis.',
+    title: 'Everything At A Glance',
+    text: 'Stay in the loop of all information and fun elements of AMRITPEX 2023 and choose your activities beforehand!',
     image: {uri: '../assets/images/Logo.png'},
     backgroundColor: '#103993',
   },
   {
     key: 's3',
-    title: 'Lorem ipsum dolor sit amet consectetur. In malesuada.',
-    text: 'Lorem ipsum dolor sit amet consectetur. Eleifend donec pretium in porta cras felis.',
+    title: 'Learning With Fun',
+    text: 'Explore the world of Philately with dedicated workshops, quizzes, and guided tours. Let’s go!',
     image: {
       uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/intro_discount.png',
     },

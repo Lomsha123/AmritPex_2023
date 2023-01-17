@@ -3,6 +3,7 @@
 /* eslint-disable jsx-quotes */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
+
 import {
   StyleSheet,
   Text,
@@ -11,21 +12,67 @@ import {
   TextInput,
   ImageBackground,
   Image,
+  Linking,
 } from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const IndividualCard = props => {
   const handleCard = props.handleCard;
   const [isChecked, setIsChecked] = useState(false);
   const iconName = isChecked ? 'checkbox-marked' : 'checkbox-blank-outline';
   const navigation = props.navigation;
+  const [user_name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [id, setId] = useState(0);
+  const baseUrl = 'http://44.227.33.138:3000';
+
+  const signUp = () => {
+    axios
+      .post(`${baseUrl}/user/create`, {
+        user_name: user_name,
+        phone: phone,
+        email: email,
+      })
+      .then(function (res) {
+        // alert(res.data.data.result);
+        setId(res.data.data.result);
+        console.log(res.data);
+        storeData(res.data.data.result);
+        navigation.push('Home');
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const storeData = async value => {
+    try {
+      const json = JSON.stringify({
+        user_id: value,
+        user_name: user_name,
+      });
+      await AsyncStorage.setItem('Data', json);
+    } catch (e) {
+      // saving error
+      console.log(e);
+    }
+  };
   return (
     <View style={styles.container}>
-      <ImageBackground style={{height:hp(70), paddingVertical:hp(5), width:wp(90), paddingHorizontal:wp(7)}} source={require('../assets/images/Image_bg.png')}>
+      <ImageBackground
+        style={{
+          height: hp(70),
+          paddingVertical: hp(5),
+          width: wp(90),
+          paddingHorizontal: wp(7),
+        }}
+        source={require('../assets/images/Image_bg.png')}>
         <View
           style={{
             flexDirection: 'row',
@@ -64,11 +111,15 @@ const IndividualCard = props => {
           </TouchableOpacity>
         </View>
         <View style={{marginTop: hp(1.5)}}>
-          <View style={{marginVertical: hp(1), marginTop:hp(3)}}>
+          <View style={{marginVertical: hp(1), marginTop: hp(3)}}>
             <TextInput
               style={styles.textInputBar}
               placeholder="Full Name"
               backgroundColor="#DEDEDE"
+              placeholderTextColor='rgba(152, 152, 152, 1)'
+              onChangeText={val => {
+                setName(val);
+              }}
             />
           </View>
           <View style={{marginVertical: hp(3)}}>
@@ -76,13 +127,22 @@ const IndividualCard = props => {
               style={styles.textInputBar}
               placeholder="Phone"
               backgroundColor="#DEDEDE"
+              placeholderTextColor='rgba(152, 152, 152, 1)'
+              onChangeText={val => {
+                setPhone(`91${val}`);
+                console.log(phone);
+              }}
             />
           </View>
-          <View style={{marginVertical: hp(1), marginBottom:hp(3)}}>
+          <View style={{marginVertical: hp(1), marginBottom: hp(3)}}>
             <TextInput
               style={styles.textInputBar}
-              placeholder="Email or Phone"
+              placeholder="Email"
               backgroundColor="#DEDEDE"
+              placeholderTextColor='rgba(152, 152, 152, 1)'
+              onChangeText={val => {
+                setEmail(val);
+              }}
             />
           </View>
           <View
@@ -119,7 +179,7 @@ const IndividualCard = props => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              navigation.push('Home');
+              signUp();
             }}>
             <View
               style={{
@@ -137,14 +197,26 @@ const IndividualCard = props => {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={{justifyContent:'center', alignItems:'center', marginTop:hp(2)}}>
-          <Text style={{color:'black', fontWeight:'500'}}>Follow us on</Text>
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: hp(2),
+          }}>
+          <Text style={{color: 'black', fontWeight: '500'}}>Follow us on</Text>
         </View>
-        <View style={{flexDirection:'row', justifyContent:'space-around', marginTop:hp(3), paddingHorizontal:wp(9)}}>
-          <Image style={{height:hp(3), width:hp(3)}} source={require('../assets/images/Instagram_Icon.png')}/>
-          <Image style={{height:hp(3), width:hp(3)}} source={require('../assets/images/Facebook_Icon.png')}/>
-          <Image style={{height:hp(3), width:hp(4)}} source={require('../assets/images/Youtube_Icon.png')}/>
-          <Image style={{height:hp(3), width:hp(3.5)}} source={require('../assets/images/Twitter_Icon.png')}/>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            marginTop: hp(3),
+            paddingHorizontal: wp(9),
+            alignItems:'center',
+          }}>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/amritpex2023/')}><Image style={{height:hp(3), width:hp(3)}} source={require('../assets/images/Instagram_Icon.png')}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/profile.php?id=100088534073563')}><Image style={{height:hp(3), width:hp(3)}} source={require('../assets/images/Facebook_Icon.png')}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://www.youtube.com/@IndiaPost_DoP')}><Image style={{height:hp(3), width:hp(4)}} source={require('../assets/images/Youtube_Icon.png')}/></TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL('https://twitter.com/Amritpex2023')}><Image style={{height:hp(3), width:hp(3.5)}} source={require('../assets/images/Twitter_Icon.png')}/></TouchableOpacity>
         </View>
       </ImageBackground>
     </View>
@@ -157,8 +229,8 @@ const styles = StyleSheet.create({
     height: hp(80),
     borderRadius: hp(1.5),
     padding: hp(2.5),
-    justifyContent:'center',
-    alignItems:'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headingStyle: {
     color: '#103994',
@@ -169,6 +241,7 @@ const styles = StyleSheet.create({
     borderRadius: wp(2),
     padding: wp(3),
     fontWeight: '600',
+    color:'black',
   },
 });
 

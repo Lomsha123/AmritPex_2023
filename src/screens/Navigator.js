@@ -10,6 +10,12 @@ import AboutScreen from './AboutScreen';
 import ActivitiesScreen from './ActivitiesScreen';
 import DownloadScreen from './Downloads';
 import Gallery from './Gallery';
+import ActivityDetailScreen from './ActivityDetail';
+import QuizScreen from './QuizScreen';
+import QuizHome from './QuizHome';
+import NormalPassScreen from './NormalPassScreen';
+import GoldenPassScreen from './GoldenPassScreen';
+import ActivitiesCategoryScreen from './Activity_CategoryScreen';
 
 
 const Stack = createStackNavigator();
@@ -26,6 +32,12 @@ function Navigator() {
       <Stack.Screen name="ActivitiesScreen" component={ActivitiesScreen} options={{headerShown: false}}/>
       <Stack.Screen name="DownloadScreen" component={DownloadScreen} options={{headerShown: false}}/>
       <Stack.Screen name="Gallery" component={Gallery} options={{headerShown: false}}/>
+      <Stack.Screen name="ActivityDetail" component={ActivityDetailScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="QuizScreen" component={QuizScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="QuizHome" component={QuizHome} options={{headerShown: false}}/>
+      <Stack.Screen name="NormalPass" component={NormalPassScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="GoldenPass" component={GoldenPassScreen} options={{headerShown: false}}/>
+      <Stack.Screen name="ActivityCategoryScreen" component={ActivitiesCategoryScreen} options={{headerShown: false}}/>
     </Stack.Navigator>
   );
 }
